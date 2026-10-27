@@ -1,4 +1,5 @@
 import { formatPrice, menu, site } from "../_data/site";
+import { AddToCart } from "./cart/add-to-cart";
 import { PhoneIcon } from "./icons";
 
 export function Menu() {
@@ -72,6 +73,7 @@ export function Menu() {
                           formatPrice(item)
                         )}
                       </span>
+                      <AddToCart itemId={item.id} className="self-center" />
                     </div>
                     {item.description && <p className="mt-1 leading-snug text-ink/70">{item.description}</p>}
                     {item.extra && <p className="mt-1 text-sm font-medium text-brand">{item.extra}</p>}
@@ -86,8 +88,8 @@ export function Menu() {
           data-reveal
           className="mt-6 flex flex-col items-start gap-6 border-t-2 border-ink/15 pt-10 md:flex-row md:items-center md:justify-between"
         >
-          <p className="font-display text-4xl leading-none md:text-5xl">
-            ¿Se te antojó? <span className="text-brand">Pide a domicilio.</span>
+          <p className="max-w-2xl font-display text-4xl leading-none md:text-5xl">
+            ¿Se te antojó? <span className="text-brand">Arma tu pedido con el + y envíalo por WhatsApp.</span>
           </p>
           <a
             href={site.phoneHref}

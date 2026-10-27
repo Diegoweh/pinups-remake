@@ -4,6 +4,7 @@ import brochetas from "@/public/images/stars/brochetas.jpg";
 import alitas from "@/public/images/stars/alitas.jpg";
 import mariscos from "@/public/images/stars/mariscos.jpg";
 import { favorites } from "../_data/site";
+import { AddToCart } from "./cart/add-to-cart";
 
 const images = { burger, brochetas, alitas, mariscos };
 
@@ -64,6 +65,9 @@ export function Favorites() {
                   <p data-reveal style={{ "--d": "220ms" } as React.CSSProperties} className="mt-5 max-w-sm text-lg leading-relaxed text-ink/75">
                     {item.description}
                   </p>
+                  <div data-reveal style={{ "--d": "300ms" } as React.CSSProperties} className="mt-7">
+                    <AddToCart itemId={item.itemId} variant="pill" />
+                  </div>
                 </div>
               </li>
             );

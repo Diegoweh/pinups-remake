@@ -1,3 +1,6 @@
+import { FloatingCartButton } from "./_components/cart/cart-button";
+import { CartProvider } from "./_components/cart/cart-context";
+import { CartDrawer } from "./_components/cart/cart-drawer";
 import { Favorites } from "./_components/favorites";
 import { Footer } from "./_components/footer";
 import { Gallery } from "./_components/gallery";
@@ -13,7 +16,7 @@ import { Visit } from "./_components/visit";
 
 export default function Home() {
   return (
-    <>
+    <CartProvider>
       <RestaurantJsonLd />
       <a
         href="#main"
@@ -36,7 +39,9 @@ export default function Home() {
         <Visit />
       </main>
       <Footer />
+      <FloatingCartButton />
+      <CartDrawer />
       <RevealObserver />
-    </>
+    </CartProvider>
   );
 }
