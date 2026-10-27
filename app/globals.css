@@ -1,26 +1,190 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bebas), "Impact", "Arial Narrow", sans-serif;
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-brand: #e1262d;
+  --color-brand-dark: #b71920;
+  --color-cream: #f3e9da;
+  --color-cream-deep: #e6d6bd;
+  --color-ink: #151112;
+  --color-ink-soft: #241d1e;
+  --color-mustard: #ffc531;
+
+  --ease-snap: cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-brand);
+  color: white;
+}
+
+/* ---------- Motifs ---------- */
+
+.checker {
+  --sq: 14px;
+  height: calc(var(--sq) * 2);
+  background: conic-gradient(
+      var(--checker-color, var(--color-brand)) 25%,
+      transparent 0 50%,
+      var(--checker-color, var(--color-brand)) 0 75%,
+      transparent 0
+    )
+    0 0 / calc(var(--sq) * 2) calc(var(--sq) * 2);
+}
+
+.text-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px currentColor;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Hero ---------- */
+
+.hero-slide {
+  opacity: 0;
+  animation: hero-fade 24s linear infinite backwards;
+  animation-delay: calc(var(--i) * 6s - 1s);
+}
+
+@keyframes hero-fade {
+  0% { opacity: 0; transform: scale(1.12); }
+  4% { opacity: 1; }
+  25% { opacity: 1; }
+  29% { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+.rise {
+  animation: rise 0.9s var(--ease-snap) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.6em) rotate(2deg); }
+  to { opacity: 1; transform: none; }
+}
+
+.spin-slow {
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.wobble {
+  animation: wobble 3.5s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(-3deg) scale(1.06); }
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--speed, 32s) linear infinite;
+}
+
+.marquee[data-reverse] {
+  animation-direction: reverse;
+}
+
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Scroll reveal (progressive: only hidden when JS can reveal it) ---------- */
+
+[data-reveal] {
+  transition:
+    opacity 0.9s var(--ease-snap),
+    transform 0.9s var(--ease-snap);
+  transition-delay: var(--d, 0ms);
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal]:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  [data-reveal="left"]:not(.is-visible) {
+    transform: translateX(-64px);
+  }
+  [data-reveal="right"]:not(.is-visible) {
+    transform: translateX(64px);
+  }
+  [data-reveal="pop"]:not(.is-visible) {
+    transform: scale(0.6) rotate(-14deg);
+  }
+  [data-reveal="zoom"]:not(.is-visible) {
+    transform: scale(0.88) rotate(-2deg);
+  }
+}
+
+/* ---------- Scroll-driven parallax (progressive enhancement) ---------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax > img {
+      scale: 1.18;
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+    .grow-on-scroll {
+      animation: grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
+@keyframes parallax {
+  from { translate: 0 -8%; }
+  to { translate: 0 8%; }
+}
+
+@keyframes grow {
+  from { clip-path: inset(6% 8% round 2rem); }
+  to { clip-path: inset(0 0 round 0); }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-slide { animation: none; }
+  .hero-slide:first-child { opacity: 1; }
+  .rise, .spin-slow, .wobble, .marquee { animation: none; }
 }
