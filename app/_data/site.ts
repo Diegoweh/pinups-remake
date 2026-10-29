@@ -182,8 +182,8 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
     title: "Ensaladas",
     items: [
       { name: "César", price: 128, description: "Lechuga romana, crotones, parmesano y aderezo César." },
-      { name: "Taco", price: 219 },
-      { name: "Tropical", price: 175 },
+      { name: "Taco", price: 219, description: "Pechuga de pollo crunchy, tocino, piña, lechuga y tomate. Salséala a tu gusto." },
+      { name: "Tropical", price: 175, description: "Pechuga de pollo crunchy, tocino, piña, lechuga y tomate. Salséala a tu gusto." },
     ],
   },
 ];
