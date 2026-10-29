@@ -33,6 +33,17 @@ export const site = {
     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7332.042377945692!2d-106.45219100000001!3d23.242316!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869f54a32ba5dcf3%3A0x32273f7b960b4a21!2sPINUPS%20FUN%20%26%20GRILL%20Comida%2C%20Diversi%C3%B3n%20y%20M%C3%BAsica%20en%20vivo!5e0!3m2!1ses-419!2sus!4v1793054935014!5m2!1ses-419!2sus",
 } as const;
 
+export const social = [
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/Pinupsfungrill" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/pinupsfungrill/" },
+  { id: "whatsapp", label: "WhatsApp", href: `https://wa.me/${site.whatsapp}` },
+  {
+    id: "ubereats",
+    label: "Uber Eats",
+    href: "https://www.ubereats.com/store-browse-uuid/57bb5200-ce72-4812-96a4-7e363d60ada5?diningMode=DELIVERY",
+  },
+] as const;
+
 export const nav = [
   { href: "#favoritos", label: "Favoritos" },
   { href: "#menu", label: "Menú" },

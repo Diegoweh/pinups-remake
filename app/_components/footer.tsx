@@ -1,6 +1,7 @@
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import { nav, site } from "../_data/site";
+import { SocialLinks } from "./social-links";
 
 export function Footer() {
   return (
@@ -12,6 +13,7 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-cream/60">
             {site.tagline}. {site.address.neighborhood}, {site.address.city}.
           </p>
+          <SocialLinks className="mt-6" />
         </div>
         <nav aria-label="Pie de página">
           <ul className="flex flex-wrap gap-x-8 gap-y-2 font-display text-xl tracking-wider">

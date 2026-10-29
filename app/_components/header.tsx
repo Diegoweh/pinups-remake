@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import logo from "@/public/images/logo.png";
 import { nav, site } from "../_data/site";
 import { PhoneIcon } from "./icons";
+import { SocialLinks } from "./social-links";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -121,6 +122,12 @@ export function Header() {
           <br />
           {site.hours.days} · {site.hours.time}
         </p>
+        <SocialLinks
+          onBrand
+          className={`mt-6 text-white transition duration-500 ease-snap ${
+            open ? "translate-y-0 opacity-100 delay-[600ms]" : "translate-y-6 opacity-0 duration-200"
+          }`}
+        />
       </div>
     </>
   );

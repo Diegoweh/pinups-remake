@@ -1,4 +1,4 @@
-import { menu, site } from "../_data/site";
+import { menu, site, social } from "../_data/site";
 
 export function RestaurantJsonLd() {
   const jsonLd = {
@@ -11,6 +11,7 @@ export function RestaurantJsonLd() {
     telephone: site.phoneE164,
     image: [`${site.url}/images/og-image.jpg`, `${site.url}/images/ambiente.jpg`],
     logo: `${site.url}/images/logo-dark.png`,
+    sameAs: social.filter((s) => s.id === "facebook" || s.id === "instagram").map((s) => s.href),
     priceRange: "$$",
     servesCuisine: ["Burgers", "Mariscos", "Mexicana", "Bar & Grill"],
     acceptsReservations: true,
