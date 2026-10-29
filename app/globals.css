@@ -78,6 +78,20 @@ body {
   100% { opacity: 0; transform: scale(1); }
 }
 
+/* Mobile set has 3 slides: same 6s per slide and ~1s fades, over an 18s loop. */
+.hero-slides-3 .hero-slide {
+  animation-name: hero-fade-3;
+  animation-duration: 18s;
+}
+
+@keyframes hero-fade-3 {
+  0% { opacity: 0; transform: scale(1.12); }
+  5.5% { opacity: 1; }
+  33.3% { opacity: 1; }
+  38.9% { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
 .rise {
   animation: rise 0.9s var(--ease-snap) both;
   animation-delay: var(--d, 0ms);

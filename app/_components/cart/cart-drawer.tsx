@@ -141,6 +141,9 @@ export function CartDrawer() {
                             <TrashIcon className="size-4" />
                           </button>
                         </div>
+                        {line.item.description && (
+                          <p className="mt-1.5 text-sm leading-snug text-ink/70">{line.item.description}</p>
+                        )}
                         <p className="mt-1 text-sm text-ink/60">
                           {line.unitPrice === null ? "Precio a confirmar" : `${money(line.unitPrice)} c/u`}
                         </p>

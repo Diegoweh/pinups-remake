@@ -65,7 +65,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-MX" className={`${bebas.variable} ${outfit.variable} antialiased`}>
+    <html lang="es-MX" className={`${bebas.variable} ${outfit.variable} overflow-x-clip antialiased`}>
       <body className="min-h-dvh overflow-x-clip">{children}</body>
     </html>
   );

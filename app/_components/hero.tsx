@@ -3,6 +3,9 @@ import burger from "@/public/images/hero/h2.jpg";
 import molcajete from "@/public/images/hero/desckpot-3.webp";
 import imperiales from "@/public/images/hero/h1.jpg";
 import drinks from "@/public/images/hero/h4.jpg";
+import burgerMobile from "@/public/images/hero/mobile-1.webp";
+import bonelessMobile from "@/public/images/hero/mobile-2.webp";
+import imperialesMobile from "@/public/images/hero/mobile-3.webp";
 import mark from "@/public/images/mark.png";
 import { site } from "../_data/site";
 import { ArrowIcon, ClockIcon, PinIcon, StarIcon } from "./icons";
@@ -13,6 +16,35 @@ const slides = [
   { src: imperiales, alt: "Camarones Imperiales servidos en tendedero" },
   { src: drinks, alt: "Pinup Rita con sandía y bebida de pepino" },
 ];
+
+/** Portrait crops shown below `md`, so the dish fills a phone screen. */
+const mobileSlides = [
+  { src: burgerMobile, alt: "Burger de top sirloin con tocino y queso en Pinup's" },
+  { src: bonelessMobile, alt: "Boneless con salsa, papas y aderezo ranch" },
+  { src: imperialesMobile, alt: "Camarones Imperiales gratinados con tocino" },
+];
+
+function Slides({ items, sizes, className }: { items: typeof slides; sizes: string; className: string }) {
+  return (
+    <div className={`absolute inset-0 ${className}`}>
+      {items.map((s, i) => (
+        <div key={i} className="hero-slide absolute inset-0" style={{ "--i": i } as React.CSSProperties}>
+          <Image
+            src={s.src}
+            alt=""
+            fill
+            sizes={sizes}
+            placeholder="blur"
+            className="object-cover"
+            // Both sets render; only the visible one's lazy slides ever load, so eager-load just the first of each.
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : "auto"}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const headline = [
   { text: "Burgers,", className: "text-cream" },
@@ -25,19 +57,8 @@ export function Hero() {
   return (
     <section id="inicio" className="relative isolate flex min-h-svh items-end overflow-hidden bg-ink pb-24 pt-32 md:pb-28">
       <div className="absolute inset-0 -z-10" aria-hidden>
-        {slides.map((s, i) => (
-          <div key={i} className="hero-slide absolute inset-0" style={{ "--i": i } as React.CSSProperties}>
-            <Image
-              src={s.src}
-              alt=""
-              fill
-              sizes="100vw"
-              placeholder="blur"
-              className="object-cover"
-              {...(i === 0 ? { preload: true } : {})}
-            />
-          </div>
-        ))}
+        <Slides items={slides} sizes="100vw" className="hidden md:block" />
+        <Slides items={mobileSlides} sizes="100vw" className="hero-slides-3 md:hidden" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/30" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-transparent to-transparent" />
       </div>

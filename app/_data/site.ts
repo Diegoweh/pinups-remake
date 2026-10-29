@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
 import burgerImg from "@/public/images/stars/burger.jpg";
 import imperialesImg from "@/public/images/stars/brochetas.jpg";
-import bonelessImg from "@/public/images/stars/alitas.jpg";
-import cevicheImg from "@/public/images/stars/mariscos.jpg";
+import bonelessImg from "@/public/images/stars/alitas.webp";
+import cevicheImg from "@/public/images/stars/mariscos.webp";
 import molcajeteImg from "@/public/images/hero/desckpot-3.webp";
 
 export const site = {
@@ -55,6 +55,8 @@ type MenuItemInput = {
   options?: MenuOptionGroup[];
   /** Product photo. Leave empty until we have one; a branded placeholder is shown instead. */
   image?: StaticImageData;
+  /** CSS object-position keeping the dish in frame when the photo is cropped (e.g. "50% 75%"). */
+  imageFocus?: string;
 };
 
 export type MenuItem = MenuItemInput & { id: string; section: string };
@@ -139,7 +141,7 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
       { name: "Aguachile del Patrón", price: 239, description: "Camarón bañado con nuestra intensa salsa negra." },
       { name: "Aguachile sinaloense", price: 235, description: "Camarón preparado con el sabor tradicional de la casa." },
       { name: "Ceviche tradicional de camarón", price: 230, description: "Estilo sinaloense con tomate, pepino y cebolla morada." },
-      { name: "Ceviche Pinup's Especial", price: 349, description: "Camarón fresco con salsa coctelera picosita, servido en molcajete y rodeado de camarones cocidos.", image: cevicheImg },
+      { name: "Ceviche Pinup's Especial", price: 349, description: "Camarón fresco con salsa coctelera picosita, servido en molcajete y rodeado de camarones cocidos.", image: cevicheImg, imageFocus: "50% 68%" },
     ],
   },
   {
@@ -147,7 +149,7 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
     title: "Alitas y boneless",
     items: [
       { name: "Alitas 360 g", price: 159, description: "Con papas fritas, ranch, apio y zanahoria.", options: [salsas] },
-      { name: "Boneless 180 g", price: 179, description: "Pechuga de pollo con empanizado crunchy, papas fritas y ranch.", extra: "Salsas: BBQ Original, Buffalo Ranch, Mango Miel Habanero, Buffalo, Naturales o Lemon Pepper", options: [salsas], image: bonelessImg },
+      { name: "Boneless 180 g", price: 179, description: "Pechuga de pollo con empanizado crunchy, papas fritas y ranch.", extra: "Salsas: BBQ Original, Buffalo Ranch, Mango Miel Habanero, Buffalo, Naturales o Lemon Pepper", options: [salsas], image: bonelessImg, imageFocus: "52% 75%" },
     ],
   },
   {
@@ -208,6 +210,7 @@ export const favorites = [
     name: "Boneless",
     price: 179,
     image: "alitas",
+    focus: "52% 75%",
     kicker: "Seis salsas",
     description: "Pechuga con empanizado crunchy, papas y ranch. BBQ, Buffalo Ranch, Mango Miel Habanero, Lemon Pepper y más.",
   },
@@ -216,6 +219,7 @@ export const favorites = [
     name: "Ceviche Pinup's Especial",
     price: 349,
     image: "mariscos",
+    focus: "50% 68%",
     kicker: "Mariscos frescos",
     description: "Camarón fresco en salsa coctelera picosita, servido en molcajete y rodeado de camarones cocidos.",
   },

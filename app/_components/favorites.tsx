@@ -1,8 +1,8 @@
 import Image from "next/image";
 import burger from "@/public/images/stars/burger.jpg";
 import brochetas from "@/public/images/stars/brochetas.jpg";
-import alitas from "@/public/images/stars/alitas.jpg";
-import mariscos from "@/public/images/stars/mariscos.jpg";
+import alitas from "@/public/images/stars/alitas.webp";
+import mariscos from "@/public/images/stars/mariscos.webp";
 import { favorites } from "../_data/site";
 import { AddToCart } from "./cart/add-to-cart";
 
@@ -22,6 +22,8 @@ export function Favorites() {
         <ol className="flex flex-col gap-24 md:gap-40">
           {favorites.map((item, i) => {
             const flip = i % 2 === 1;
+            // Anchor the parallax zoom on the dish so it isn't cropped out of frame.
+            const focus = "focus" in item ? item.focus : undefined;
             return (
               <li key={item.name} className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
                 <div className={`relative md:col-span-7 ${flip ? "md:order-2 md:col-start-6" : ""}`}>
@@ -34,6 +36,7 @@ export function Favorites() {
                       alt={item.name}
                       placeholder="blur"
                       sizes="(min-width: 768px) 58vw, 100vw"
+                      style={focus ? { objectPosition: focus, transformOrigin: focus } : undefined}
                       className="absolute inset-0 size-full object-cover"
                     />
                   </div>

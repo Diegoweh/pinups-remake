@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ambiente from "@/public/images/ambiente.webp";
 import { lineup, site } from "../_data/site";
 import { Marquee } from "./marquee";
@@ -7,13 +6,16 @@ export function Music() {
   return (
     <section id="musica" aria-labelledby="musica-title" className="relative overflow-hidden bg-ink">
       <div className="grow-on-scroll relative h-[70svh] min-h-[420px] w-full overflow-hidden md:h-[85svh]">
-        <Image
-          src={ambiente}
-          alt="Banda tocando en vivo frente a la terraza de Pinup's Fun & Grill"
-          fill
-          placeholder="blur"
-          sizes="100vw"
-          className="object-cover object-[center_20%]"
+        <video
+          src="/video/ambiente.mp4"
+          poster={ambiente.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="Banda tocando en vivo frente a la terraza de Pinup's Fun & Grill"
+          className="absolute inset-0 size-full object-cover object-[center_20%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-5 pb-10 md:px-8 md:pb-16">
