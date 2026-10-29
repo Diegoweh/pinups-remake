@@ -1,6 +1,7 @@
 import { formatPrice, menu, site } from "../_data/site";
 import { AddToCart } from "./cart/add-to-cart";
 import { PhoneIcon } from "./icons";
+import { MenuGallery } from "./menu-gallery";
 
 export function Menu() {
   return (
@@ -20,9 +21,12 @@ export function Menu() {
               El menú
             </h2>
           </div>
-          <p data-reveal style={{ "--d": "200ms" } as React.CSSProperties} className="max-w-sm text-lg text-ink/70">
-            Pan horneado diario, top sirloin y mariscos frescos de Mazatlán. Precios en pesos mexicanos.
-          </p>
+          <div data-reveal style={{ "--d": "200ms" } as React.CSSProperties} className="max-w-sm">
+            <p className="text-lg text-ink/70">
+              Pan horneado diario, top sirloin y mariscos frescos de Mazatlán. Precios en pesos mexicanos.
+            </p>
+            <MenuGallery />
+          </div>
         </header>
 
         <nav

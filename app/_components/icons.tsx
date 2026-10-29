@@ -117,3 +117,13 @@ export function NoteIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function PhotosIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-4.5-4.5L6 21" />
+    </svg>
+  );
+}
