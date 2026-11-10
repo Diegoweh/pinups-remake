@@ -237,10 +237,12 @@ export const favorites = [
 ] as const;
 
 export const lineup = [
+  { day: "Martes", en: "Tuesday", band: "True Blues", time: "5:00 PM – 8:00 PM" },
+  { day: "Miércoles", en: "Wednesday", band: "Rex", time: "7:30 PM – 11:30 PM" },
   { day: "Jueves", en: "Thursday", band: "Kraken", time: "7:00 PM – 11:00 PM" },
-  { day: "Viernes", en: "Friday", band: "Manhatlan", time: "8:00 PM – 11:30 PM" },
+  { day: "Viernes", en: "Friday", band: "Rex", time: "8:00 PM – 12:00 AM" },
   { day: "Sábado", en: "Saturday", band: "Mandrake & The Magics", time: "8:00 PM – 12:00 AM" },
-  { day: "Domingo", en: "Sunday Funday", band: "Kraken", time: "4:00 PM – 7:00 PM" },
+  { day: "Domingo", en: "Sunday Funday", band: "Kraken", time: "3:00 PM – 7:00 PM" },
 ] as const;
 
 function slugify(text: string) {

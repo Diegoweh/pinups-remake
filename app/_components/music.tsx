@@ -20,7 +20,7 @@ export function Music() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-5 pb-10 md:px-8 md:pb-16">
           <p data-reveal className="mb-6 font-display text-xl tracking-[0.2em] text-mustard md:mb-9">
-            Jueves a domingo
+            Martes a domingo
           </p>
           <h2
             id="musica-title"
@@ -34,7 +34,7 @@ export function Music() {
       </div>
 
       <Marquee
-        words={["Kraken", "Manhatlan", "Mandrake & The Magics", "Sunday Funday", "Música en vivo"]}
+        words={["True Blues", "Rex", "Kraken", "Mandrake & The Magics", "Sunday Funday", "Música en vivo"]}
         reverse
         speed="26s"
         className="border-y-2 border-brand py-3 text-4xl text-brand md:text-5xl"
