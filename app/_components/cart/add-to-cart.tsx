@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { menuById } from "../../_data/site";
+import { isAvailable, menuById } from "../../_data/site";
 import { CheckIcon, PlusIcon } from "../icons";
 import { useCart } from "./cart-context";
 
@@ -18,7 +18,7 @@ export function AddToCart({ itemId, variant = "icon", className = "" }: Props) {
     return () => clearTimeout(t);
   }, [added]);
 
-  if (!item) return null;
+  if (!item || !isAvailable(item)) return null;
 
   const onClick = () => {
     addItem(itemId);

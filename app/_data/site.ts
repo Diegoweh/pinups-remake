@@ -61,6 +61,8 @@ type MenuItemInput = {
   /** Number in MXN, or null when the printed menu says "$$$$" (market price). */
   price: number | null;
   priceNote?: string;
+  /** Set to false to show the dish as "No disponible" and block adding it to the cart. */
+  available?: boolean;
   description?: string;
   extra?: string;
   options?: MenuOptionGroup[];
@@ -110,7 +112,7 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
       { name: "Dorito Macho Burger", price: 198, description: "Top sirloin, tocino crujiente, aguacate fresco, choriqueso al tequila y aderezo especial de Doritos." },
       { name: "Crunchy Chicken Burger", price: 169, description: "Pechuga de pollo crunchy, tocino, piña, lechuga y tomate. Salséala a tu gusto." },
       { name: "Jack Daniel's BBQ Bacon Burger", price: 189 },
-      { name: "Surf & Turf Burger", price: null, description: "Top sirloin, camarones al grill, mozzarella, tocino ahumado, aguacate, cebolla crujiente y salsa suiza con chipotle." },
+      { name: "Surf & Turf Burger", price: null, available: false, description: "Top sirloin, camarones al grill, mozzarella, tocino ahumado, aguacate, cebolla crujiente y salsa suiza con chipotle." },
       { name: "La Auténtica", price: 99, description: "La clásica cheeseburger al estilo Pinup's. Pan horneado diariamente y encostrado con queso.", extra: "Agrega papas fritas o papas gajo por $29", options: [{ id: "papas", title: "Papas", choices: [{ id: "sin", label: "Sin papas" }, { id: "fritas", label: "Papas fritas", price: 29 }, { id: "gajo", label: "Papas gajo", price: 29 }] }] },
       { name: "Pinup's Burger", price: 179, description: "Champiñones frescos, mozzarella, aguacate, tocino, cebolla y nuestro aderezo secreto.", image: burgerImg },
     ],
@@ -122,7 +124,7 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
       { name: "Molcajete Borracho", price: 588, description: "Para dos: pollo, arrachera y camarón en salsa roja borracha, vegetales y queso. Con guacamole, arroz, frijoles y tortillas.", image: molcajeteImg },
       { name: "Enchiladas de camarón", price: 228, description: "Rellenas de camarón y queso, con salsa roja cremosa y mozzarella gratinada." },
       { name: "Fajitas chillantes", price: 298, description: "Pollo, arrachera o camarón con pimientos, cebolla y tomate. Incluyen guacamole, arroz, frijoles y tortillas.", options: [{ id: "proteina", title: "Proteína", choices: [{ id: "pollo", label: "Pollo" }, { id: "arrachera", label: "Arrachera" }, { id: "camaron", label: "Camarón" }] }] },
-      { name: "Mahi Mahi Rosa Pinups", price: null, description: "Filete sellado sobre salsa rosa de betabel, nuez de la India y habanero; con camarones al ajillo, elote y crujiente de masa azul." },
+      { name: "Mahi Mahi Rosa Pinups", price: null, available: false, description: "Filete sellado sobre salsa rosa de betabel, nuez de la India y habanero; con camarones al ajillo, elote y crujiente de masa azul." },
     ],
   },
   {
@@ -178,7 +180,7 @@ const rawMenu: { id: string; title: string; items: MenuItemInput[] }[] = [
     items: [
       { name: "Fettuccini Pomodoro", price: 175, description: "Salsa de tomate fresco, especias y parmesano. Elige albóndigas caseras o pollo.", options: [{ id: "proteina", title: "Con", choices: [{ id: "albondigas", label: "Albóndigas caseras" }, { id: "pollo", label: "Pollo" }] }] },
       { name: "Fettuccini con camarones", price: 239, description: "Salsa blanca con tocino, champiñones frescos y camarones a la parrilla." },
-      { name: "Fettuccini Suizo Pinups", price: null, description: "Salsa suiza cremosa con chipotle, pollo o camarones y mezcla de tres quesos gratinada.", options: [{ id: "proteina", title: "Proteína", choices: [{ id: "pollo", label: "Pollo" }, { id: "camarones", label: "Camarones" }] }] },
+      { name: "Fettuccini Suizo Pinups", price: null, available: false, description: "Salsa suiza cremosa con chipotle, pollo o camarones y mezcla de tres quesos gratinada.", options: [{ id: "proteina", title: "Proteína", choices: [{ id: "pollo", label: "Pollo" }, { id: "camarones", label: "Camarones" }] }] },
     ],
   },
   {
@@ -267,7 +269,12 @@ export const menu: MenuSection[] = rawMenu.map((section) => ({
 
 export const menuById = new Map(menu.flatMap((s) => s.items.map((item) => [item.id, item])));
 
+export function isAvailable(item: MenuItemInput) {
+  return item.available !== false;
+}
+
 export function formatPrice(item: MenuItemInput) {
+  if (!isAvailable(item)) return "No disponible";
   if (item.priceNote) return item.priceNote;
   return item.price === null ? "$$$$" : `$${item.price}`;
 }

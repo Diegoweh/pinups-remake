@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, use, useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import { menuById, type MenuItem } from "../../_data/site";
+import { isAvailable, menuById, type MenuItem } from "../../_data/site";
 
 const STORAGE_KEY = "pinups-cart-v1";
 
@@ -90,7 +90,7 @@ function readStorage(): CartLine[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     const parsed = raw ? (JSON.parse(raw) as CartLine[]) : [];
-    return Array.isArray(parsed) ? parsed.filter((l) => menuById.has(l.itemId) && l.quantity > 0) : [];
+    return Array.isArray(parsed) ? parsed.filter((l) => { const item = menuById.get(l.itemId); return !!item && isAvailable(item) && l.quantity > 0; }) : [];
   } catch {
     return [];
   }
@@ -136,7 +136,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addItem = useCallback((itemId: string, options?: SelectedOptions) => {
     const item = menuById.get(itemId);
-    if (!item) return;
+    if (!item || !isAvailable(item)) return;
     const opts = { ...defaultOptions(item), ...options };
     setRawLines((lines) => normalize([...lines, { key: "", itemId, quantity: 1, options: opts, notes: "" }]));
     setAddedTick((t) => t + 1);

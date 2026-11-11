@@ -1,4 +1,4 @@
-import { formatPrice, menu, site } from "../_data/site";
+import { formatPrice, isAvailable, menu, site } from "../_data/site";
 import { AddToCart } from "./cart/add-to-cart";
 import { PhoneIcon } from "./icons";
 import { MenuGallery } from "./menu-gallery";
@@ -64,12 +64,12 @@ export function Menu() {
               </h3>
               <ul className="flex flex-col gap-5">
                 {section.items.map((item) => (
-                  <li key={item.name}>
+                  <li key={item.name} className={isAvailable(item) ? undefined : "opacity-50"}>
                     <div className="flex items-baseline gap-3 font-display text-2xl leading-tight tracking-wide">
-                      <span>{item.name}</span>
+                      <span className={isAvailable(item) ? undefined : "line-through decoration-2"}>{item.name}</span>
                       <span aria-hidden className="mb-1.5 flex-1 border-b-2 border-dotted border-ink/30" />
-                      <span className="text-brand">
-                        {item.price === null && !item.priceNote ? (
+                      <span className={isAvailable(item) ? "text-brand" : "text-lg text-ink"}>
+                        {isAvailable(item) && item.price === null && !item.priceNote ? (
                           <abbr title="Precio según mercado" className="no-underline">
                             {formatPrice(item)}
                           </abbr>
@@ -77,7 +77,7 @@ export function Menu() {
                           formatPrice(item)
                         )}
                       </span>
-                      <AddToCart itemId={item.id} className="self-center" />
+                      {isAvailable(item) && <AddToCart itemId={item.id} className="self-center" />}
                     </div>
                     {item.description && <p className="mt-1 leading-snug text-ink/70">{item.description}</p>}
                     {item.extra && <p className="mt-1 text-sm font-medium text-brand">{item.extra}</p>}
